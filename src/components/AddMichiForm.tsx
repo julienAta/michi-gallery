@@ -6,6 +6,7 @@ import { Button } from './ui/button'
 import { Card, CardContent } from './ui/card'
 import { Loader2 } from 'lucide-react'
 import { UploadButton } from '@/utils/uploadthing'
+import { UploadDropzone } from '@/utils/uploadthing'
 const AddMichiForm = () => {
   const supabase = createBrowserClient()
   const [title, setTitle] = useState('')
@@ -31,8 +32,8 @@ const AddMichiForm = () => {
             onChange={(e) => setTags(e.target.value)}
             required
           />
-          <UploadButton
-            className="ut-button:bg-red-500 ut-button:ut-readying:bg-red-500/50 mt-4"
+          <UploadDropzone
+            className="mt-4 ut-button:bg-red-500 ut-button:ut-readying:bg-red-500/50"
             endpoint="imageUploader"
             onBeforeUploadBegin={(files) => {
               if (title === '' || tags === '') {
