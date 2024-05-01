@@ -32,8 +32,13 @@ function MichiGallery({ michis }: MichisGalleryProps) {
       />
       <div className="grid grid-cols-3 gap-4 md:grid-cols-4 lg:grid-cols-5">
         {filteredMichis.map((michi, index) => (
-          <a href={michi.url} target="_blank" rel="noopener noreferrer">
-            <div className="group relative" key={michi.url + index}>
+          <a
+            key={michi.url + index}
+            href={michi.url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div className="group relative">
               <Image
                 width={200}
                 height={200}
