@@ -1,9 +1,17 @@
+import { createServerClient } from '@/utils/supabase'
+import { cookies } from 'next/headers'
 import { createUploadthing, type FileRouter } from 'uploadthing/next'
 import { UploadThingError } from 'uploadthing/server'
 
 const f = createUploadthing()
 
-const auth = (req: Request) => ({ id: 'fakeId' }) // Fake auth function
+const auth = async (req: Request) => {
+  const cookieStore = cookies()
+  const supabase = createServerClient(cookieStore)
+  const user = await supabase.auth.getUser()
+  if (!user || !user.data.user) return null
+  return user.data.user
+} // Fake auth function
 
 // FileRouter for your app, can contain multiple FileRoutes
 export const ourFileRouter = {

@@ -12,7 +12,15 @@ import Link from 'next/link'
 export default async function Index() {
   const cookieStore = cookies()
   const supabase = createServerClient(cookieStore)
+  const user = await supabase.auth.getUser()
 
+  if (!user || !user.data.user) {
+    return (
+      <div className="flex items-center justify-center text-2xl font-bold">
+        404
+      </div>
+    )
+  }
   const { data: michiList } = await supabase.from('images').select('*')
 
   return (
