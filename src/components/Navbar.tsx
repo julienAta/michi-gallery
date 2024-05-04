@@ -1,13 +1,13 @@
 import React from 'react'
-import AuthButton from '@/components/AuthButton'
+
 import { cookies } from 'next/headers'
 import { createServerClient } from '@/utils/supabase'
-import ThemeToggle from './ThemeToggle'
+
 import Link from 'next/link'
 
 function Navbar() {
   const cookieStore = cookies()
-  const supabase = createServerClient(cookieStore)
+
   const canInitSupabaseClient = () => {
     // This function is just for the interactive tutorial.
     // Feel free to remove it once you have Supabase connected.
@@ -26,8 +26,8 @@ function Navbar() {
         {/* {isSupabaseConnected && <AuthButton />} */}
       </div>
       <Link href="/">Gallery</Link>
-      {/* <Link href="/maker">Maker</Link> */}
-      <ThemeToggle />
+      <Link href="/maker">Maker</Link>
+      <Link href="/mod">Mod</Link>
     </nav>
   )
 }

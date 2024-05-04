@@ -10,6 +10,8 @@ import { ourFileRouter } from './api/uploadthing/core'
 import { extractRouterConfig } from 'uploadthing/server'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import { cookies } from 'next/headers'
+import { createServerClient } from '@/utils/supabase'
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : 'http://localhost:3000'
@@ -20,11 +22,16 @@ export const metadata = {
   description: 'Infinite Michis',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const cookieStore = cookies()
+  const supabase = createServerClient(cookieStore)
+  const user = await supabase.auth.getUser()
+  const isAuth = user ? true : false
+
   return (
     <html
       lang="en"
@@ -45,14 +52,13 @@ export default function RootLayout({
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
-          enableSystem
           disableTransitionOnChange
         >
           <ReactQueryProvider>
             <main className="flex min-h-screen flex-col items-center">
-              <Navbar />
+              {isAuth && <Navbar />}
               {children}
-              <Analytics />{' '}
+              <Analytics />
               {/* ^^ remove this if you are not deploying to vercel. See more at https://vercel.com/docs/analytics  */}
               {/* <Footer /> */}
             </main>

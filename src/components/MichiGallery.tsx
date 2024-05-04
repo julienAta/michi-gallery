@@ -15,6 +15,7 @@ interface MichisGalleryProps {
 
 function MichiGallery({ michis }: MichisGalleryProps) {
   const [search, setSearch] = useState('')
+
   const filteredMichis = michis.filter(
     (michi) =>
       michi.title.toLowerCase().includes(search.toLowerCase()) ||

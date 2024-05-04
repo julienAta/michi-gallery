@@ -94,14 +94,14 @@ const AddMichiForm = () => {
                 setPreviewUrl('')
                 return []
               }
-              setPreviewUrl(URL.createObjectURL(files[0]))
+
               onDrop(files)
               return files
             }}
             onClientUploadComplete={async (res) => {
               const { error } = await supabase
                 .from('images')
-                .insert([{ title, tags, url: res[0].url }])
+                .insert([{ title, tags, url: res[0].url, key: res[0].key }])
               if (error) {
                 alert('Error inserting image data')
                 return
