@@ -23,8 +23,8 @@ interface MichisGalleryProps {
 
 function MichiMod({ michis }: MichisGalleryProps) {
   const [search, setSearch] = useState('')
-  const [newTitle, setNewTitle] = useState('')
-  const [newTags, setNewTags] = useState('')
+  const [newTitles, setNewTitles] = useState(michis.map((michi) => michi.title))
+  const [newTags, setNewTags] = useState(michis.map((michi) => michi.tags))
   const supabase = createBrowserClient()
   const queryClient = useQueryClient()
 
@@ -54,8 +54,7 @@ function MichiMod({ michis }: MichisGalleryProps) {
     mutationFn: updateMichi,
     onSuccess: () => {
       // Invalidate and refetch
-      setNewTags('')
-      setNewTitle('')
+
       queryClient.invalidateQueries({ queryKey: ['michis'] })
     },
   })
@@ -130,8 +129,8 @@ function MichiMod({ michis }: MichisGalleryProps) {
                   onClick={() =>
                     handleUpdate({
                       id: michi.id,
-                      newTitle,
-                      newTags,
+                      newTitle: newTitles[index],
+                      newTags: newTags[index],
                     })
                   }
                 >
@@ -141,15 +140,27 @@ function MichiMod({ michis }: MichisGalleryProps) {
               <div key={michi.id}>
                 <Input
                   type="text"
-                  value={newTitle}
+                  value={newTitles[index]}
                   placeholder="New Title"
-                  onChange={(e) => setNewTitle(e.target.value)}
+                  onChange={(e) =>
+                    setNewTitles(
+                      newTitles.map((title, i) =>
+                        i === index ? e.target.value : title,
+                      ),
+                    )
+                  }
                 />
                 <Input
                   type="text"
-                  value={newTags}
+                  value={newTags[index]}
                   placeholder="New Tags"
-                  onChange={(e) => setNewTags(e.target.value)}
+                  onChange={(e) =>
+                    setNewTags(
+                      newTags.map((tag, i) =>
+                        i === index ? e.target.value : tag,
+                      ),
+                    )
+                  }
                 />
               </div>
             </div>
