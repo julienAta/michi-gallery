@@ -11,7 +11,7 @@ function Footer() {
           className="font-bold hover:underline"
           rel="noreferrer"
         >
-          jjxlabs
+          jjx
         </a>
       </p>
     </footer>

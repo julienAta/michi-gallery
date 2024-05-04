@@ -7,6 +7,7 @@ import deleteMichi, { updateMichi } from '@/app/actions'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { createBrowserClient } from '@/utils/supabase'
 import { Loader2 } from 'lucide-react'
+import { toast } from 'sonner'
 
 interface MichiGalleryProps {
   title: string
@@ -34,6 +35,8 @@ function MichiMod({ michis }: MichisGalleryProps) {
       if (error) {
         throw new Error(error.message)
       }
+      console.log('data', data)
+
       return data
     },
 
@@ -66,7 +69,7 @@ function MichiMod({ michis }: MichisGalleryProps) {
     newTitle: string
     newTags: string
   }) => {
-    if (!newTitle && !newTags) return alert('Please enter new title or tags')
+    if (!newTitle && !newTags) return toast('Please enter new title or tags')
     updateMichiMutation({ id, title: newTitle, tags: newTags })
   }
 
@@ -108,7 +111,6 @@ function MichiMod({ michis }: MichisGalleryProps) {
               </div>
             </a>
             <div className="flex">
-              {' '}
               <div className="flex flex-col">
                 {isLoading ? (
                   <Button disabled>

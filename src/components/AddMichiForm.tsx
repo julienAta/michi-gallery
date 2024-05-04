@@ -2,12 +2,9 @@
 import { useState, useCallback, useEffect } from 'react'
 import { createBrowserClient } from '@/utils/supabase'
 import { Input } from './ui/input'
-import { Button } from './ui/button'
 import { Card, CardContent } from './ui/card'
-import { Loader2, Upload } from 'lucide-react'
-import { UploadButton, UploadDropzone } from '@/utils/uploadthing'
-import { useUploadThing } from '@/utils/uploadthing'
-import { on } from 'events'
+import { UploadDropzone } from '@/utils/uploadthing'
+import { toast } from 'sonner'
 
 const AddMichiForm = () => {
   const supabase = createBrowserClient()
@@ -15,47 +12,11 @@ const AddMichiForm = () => {
   const [tags, setTags] = useState('')
   const [file, setFile] = useState(null)
   const [previewUrl, setPreviewUrl] = useState('')
-  const [uploading, setUploading] = useState(false)
 
-  // Handle file selection for preview
   const onDrop = useCallback((acceptedFiles: any) => {
     setFile(acceptedFiles[0])
     setPreviewUrl(URL.createObjectURL(acceptedFiles[0]))
   }, [])
-
-  // Configure the upload logic
-  const { startUpload, permittedFileInfo } = useUploadThing('imageUploader', {
-    onBeforeUploadBegin(files) {
-      if (title === '' || tags === '') {
-        alert('Please fill in the title and tags')
-        return []
-      }
-      return files
-    },
-    onClientUploadComplete: () => {
-      alert('Uploaded successfully!')
-      setTags('')
-      setTitle('')
-      setFile(null)
-      setPreviewUrl('')
-      setUploading(false)
-    },
-    onUploadError: () => {
-      alert('Error occurred while uploading')
-      setUploading(false)
-    },
-    onUploadBegin: () => {
-      setUploading(true)
-    },
-  })
-
-  const fileTypes = permittedFileInfo?.config
-    ? Object.keys(permittedFileInfo?.config)
-    : []
-
-  useEffect(() => {
-    console.log('previewUrl', previewUrl)
-  }, [previewUrl])
 
   return (
     <Card className="min-w-full">
@@ -89,7 +50,7 @@ const AddMichiForm = () => {
             endpoint="imageUploader"
             onBeforeUploadBegin={(files: any) => {
               if (title === '' || tags === '') {
-                alert('Please fill in the title and tags')
+                toast('Please fill in the title and tags')
                 setFile(null)
                 setPreviewUrl('')
                 return []
@@ -103,12 +64,17 @@ const AddMichiForm = () => {
                 .from('images')
                 .insert([{ title, tags, url: res[0].url, key: res[0].key }])
               if (error) {
-                alert('Error inserting image data')
+                toast('Error inserting image data')
                 return
               }
+              setTags('')
+              setTitle('')
+              setFile(null)
+              setPreviewUrl('')
+              toast('Uploaded successfully!')
             }}
             onUploadError={(error) => {
-              alert(`ERROR! ${error.message}`)
+              toast('Error occurred while uploading')
             }}
           />
         </div>

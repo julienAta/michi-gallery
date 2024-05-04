@@ -12,6 +12,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { cookies } from 'next/headers'
 import { createServerClient } from '@/utils/supabase'
+import { Toaster } from '@/components/ui/sonner'
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : 'http://localhost:3000'
@@ -58,6 +59,7 @@ export default async function RootLayout({
             <main className="flex min-h-screen flex-col items-center">
               {isAuth && <Navbar />}
               {children}
+              <Toaster />
               <Analytics />
               {/* ^^ remove this if you are not deploying to vercel. See more at https://vercel.com/docs/analytics  */}
               {/* <Footer /> */}
