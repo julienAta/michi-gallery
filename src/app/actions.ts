@@ -16,7 +16,7 @@ export default async function deleteMichi(
   const supabase = createServerClientWithAdmin(cookieStore)
 
   const user = await supabase.auth.getUser()
-  if (!user || !user.data.user) {
+  if (!user || !user.data.user?.id) {
     throw new Error('You must be logged in to delete michis')
   }
 
@@ -37,8 +37,8 @@ export async function updateMichi(variables: {
   const { id, title, tags } = variables
   const cookieStore = cookies()
   const supabase = createServerClientWithAdmin(cookieStore)
-  const user = supabase.auth.getUser()
-  if (!user) {
+  const user = await supabase.auth.getUser()
+  if (!user || !user.data.user?.id) {
     throw new Error('You must be logged in to delete michis')
   }
 

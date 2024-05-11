@@ -7,7 +7,7 @@ export default async function Page() {
   const supabase = createServerClient(cookieStore)
   const user = await supabase.auth.getUser()
 
-  if (!user || !user.data.user) {
+  if (!user || !user.data.user?.id) {
     return (
       <div className="flex items-center justify-center text-2xl font-bold">
         404
