@@ -31,7 +31,7 @@ export default async function RootLayout({
   const cookieStore = cookies()
   const supabase = createServerClient(cookieStore)
   const user = await supabase.auth.getUser()
-  const isAuth = user ? true : false
+  const isAuth = user.data.user?.id ? true : false
 
   return (
     <html
