@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Input } from './ui/input'
 import Image from 'next/image'
 import { Button } from './ui/button'
@@ -48,13 +48,14 @@ function MichiMod({ michis }: MichisGalleryProps) {
     mutationFn: deleteMichi,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['michis'] })
+      toast('Michi deleted!')
     },
   })
   const { mutate: updateMichiMutation } = useMutation({
     mutationFn: updateMichi,
     onSuccess: () => {
       // Invalidate and refetch
-
+      toast('Michi updated!')
       queryClient.invalidateQueries({ queryKey: ['michis'] })
     },
   })
@@ -79,13 +80,27 @@ function MichiMod({ michis }: MichisGalleryProps) {
         michi.tags.toLowerCase().includes(search.toLowerCase()),
     ) || []
 
+  useEffect(() => {
+    if (michiList) {
+      const filtered = michiList.filter(
+        (michi) =>
+          michi.title.toLowerCase().includes(search.toLowerCase()) ||
+          michi.tags.toLowerCase().includes(search.toLowerCase()),
+      )
+      setNewTitles(filtered.map((m) => m.title))
+      setNewTags(filtered.map((m) => m.tags))
+    }
+  }, [search, michiList])
+
   return (
     <div className="flex flex-col items-center">
       <Input
         type="text"
         placeholder="Search by title or tags..."
         value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={(e) => {
+          setSearch(e.target.value)
+        }}
         className="mb-4 w-1/2 rounded-lg border p-2"
       />
       <div className="grid grid-cols-3 gap-4 md:grid-cols-4 lg:grid-cols-5">
