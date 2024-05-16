@@ -1,9 +1,9 @@
 {
-  "name": "supa-next-starter",
-  "description": "A production ready Next.js/Supabase starter. ",
+  "name": "michi",
+  "description": "The best meme token on the best blockchain",
   "version": "1.0.0",
   "private": true,
-  "author": "Michael Troya <hi@michaeltroya.ca> (@michaeltroya)",
+  "author": "jjx",
   "license": "MIT",
   "keywords": [
     "nextjs",
@@ -48,6 +48,7 @@
     "nextjs-toploader": "^1.6.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "sharp": "^0.33.4",
     "sonner": "^1.4.41",
     "tailwind-merge": "^2.2.0",
     "undici": "^5.28.2",
