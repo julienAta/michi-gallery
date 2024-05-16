@@ -19,7 +19,7 @@ async function Navbar() {
           </Avatar>
         </Link>
       </div>
-      <div className="flex space-x-4 text-sm">
+      <div className="flex space-x-4 text-sm font-semibold">
         <Link href="/gallery">Gallery</Link>
         <Link
           target="_blank"
