@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 export function HeaderMain() {
   return (
-    <div className="my-10 flex h-full items-center justify-center  bg-[#f5e1bc] p-4">
+    <div className="my-10 flex h-full w-full items-center justify-center  bg-[#f5e1bc] p-4">
       <div className="flex flex-col items-center  space-y-14">
         {/* <Avatar className="mb-4">
           <AvatarImage
@@ -27,13 +27,13 @@ export function HeaderMain() {
             width="300"
           />
         </div>
-        <div className="mt-4 rounded-xl bg-[#fdf5e7] p-5 text-right text-xl font-bold text-[#764824]">
+        <div className="mt-4 rounded-xl bg-[#fdf5e7] p-5 text-center  text-xl font-bold text-[#764824]">
           The most memeable cat on the internet
         </div>
-        <div className="mt-4 text-right text-xl font-bold text-[#764824]">
+        <div className="mt-4 hidden max-w-fit  text-right text-xl font-bold text-[#764824] md:block">
           CA: 5mbK36SZ7J19An8jFochhQS4of8g6BwUjbeCSxBSoWdp
         </div>
-        <div className="mt-4 space-x-10  text-xl font-bold  text-[#764824]">
+        <div className="mt-4 space-x-1  text-xl font-bold text-[#764824]  md:space-x-10">
           <Link
             target="_blank"
             rel="noopener noreferrer"
