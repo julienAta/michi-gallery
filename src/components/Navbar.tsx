@@ -21,9 +21,16 @@ async function Navbar() {
       </div>
       <div className="flex space-x-4 text-sm">
         <Link href="/gallery">Gallery</Link>
+        <Link
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://michisolana.org/michi-meme-maker/"
+        >
+          Maker
+        </Link>
         {user && user.data.user?.id && (
           <>
-            <Link href="/maker">Maker</Link>
+            <Link href="/upload">Upload</Link>
             <Link href="/mod">Mod</Link>
           </>
         )}
