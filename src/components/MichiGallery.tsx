@@ -7,7 +7,7 @@ interface MichiGalleryProps {
   title: string
   tags: string
   url: string
-  createdAt: string
+  uploaded_at: string
 }
 interface MichisGalleryProps {
   michis: MichiGalleryProps[]
@@ -17,7 +17,13 @@ function MichiGallery({ michis }: MichisGalleryProps) {
   const [search, setSearch] = useState('')
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
-  const filteredMichis = michis.filter(
+  // Sort michis by createdAt date in descending order (newest first)
+  const sortedMichis = [...michis].sort(
+    (a, b) =>
+      new Date(b.uploaded_at).getTime() - new Date(a.uploaded_at).getTime(),
+  )
+
+  const filteredMichis = sortedMichis.filter(
     (michi) =>
       michi.title.toLowerCase().includes(search.toLowerCase()) ||
       michi.tags.toLowerCase().includes(search.toLowerCase()),
