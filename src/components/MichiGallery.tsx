@@ -17,7 +17,6 @@ function MichiGallery({ michis }: MichisGalleryProps) {
   const [search, setSearch] = useState('')
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
-  // Sort michis by createdAt date in descending order (newest first)
   const sortedMichis = [...michis].sort(
     (a, b) =>
       new Date(b.uploaded_at).getTime() - new Date(a.uploaded_at).getTime(),

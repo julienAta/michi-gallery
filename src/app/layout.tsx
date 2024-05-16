@@ -3,15 +3,13 @@ import ThemeProvider from '@/providers/ThemeProvider'
 import NextTopLoader from 'nextjs-toploader'
 import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+
 import ReactQueryProvider from '@/providers/ReactQueryProvider'
 import { NextSSRPlugin } from '@uploadthing/react/next-ssr-plugin'
 import { ourFileRouter } from './api/uploadthing/core'
 import { extractRouterConfig } from 'uploadthing/server'
 import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
-import { cookies } from 'next/headers'
-import { createServerClient } from '@/utils/supabase'
+
 import { Toaster } from '@/components/ui/sonner'
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -19,20 +17,15 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: 'Michi Gallery',
-  description: 'Infinite Michis',
+  title: 'Michi',
+  description: 'Best meme coin on Solana',
 }
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const cookieStore = cookies()
-  const supabase = createServerClient(cookieStore)
-  const user = await supabase.auth.getUser()
-  const isAuth = user.data.user?.id ? true : false
-
   return (
     <html
       lang="en"

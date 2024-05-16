@@ -54,7 +54,6 @@ function MichiMod({ michis }: MichisGalleryProps) {
   const { mutate: updateMichiMutation } = useMutation({
     mutationFn: updateMichi,
     onSuccess: () => {
-      // Invalidate and refetch
       toast('Michi updated!')
       queryClient.invalidateQueries({ queryKey: ['michis'] })
     },
@@ -111,7 +110,7 @@ function MichiMod({ michis }: MichisGalleryProps) {
                 <Image
                   width={200}
                   height={200}
-                  className="h-auto w-full rounded-lg object-cover" // Added object-cover to maintain aspect ratio
+                  className="h-auto w-full rounded-lg object-cover"
                   src={michi.url}
                   alt={michi.title}
                 />
@@ -119,8 +118,6 @@ function MichiMod({ michis }: MichisGalleryProps) {
                 <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 px-3 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                   <p className="text-lg font-bold">{michi.title}</p>
                   <p className="text-sm">{michi.tags}</p>
-                  {/* Uncomment if you also want to show createdAt on hover */}
-                  {/* <p className="text-xs">{michi.createdAt}</p> */}
                 </div>
               </div>
             </a>
