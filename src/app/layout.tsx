@@ -39,7 +39,7 @@ export default async function RootLayout({
       className={GeistSans.className}
       style={{ colorScheme: 'dark' }}
     >
-      <body className="bg-background text-foreground">
+      <body className=" bg-[#f5e1bc]  text-foreground">
         <NextSSRPlugin
           /**
            * The `extractRouterConfig` will extract **only** the route configs
@@ -52,19 +52,19 @@ export default async function RootLayout({
         <NextTopLoader showSpinner={false} height={2} color="#2acf80" />
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="light"
           disableTransitionOnChange
         >
           <ReactQueryProvider>
             <main className="flex min-h-screen flex-col items-center">
-              {isAuth && <Navbar />}
+              <Navbar />
               {children}
               <Toaster />
               <Analytics />
               {/* ^^ remove this if you are not deploying to vercel. See more at https://vercel.com/docs/analytics  */}
               {/* <Footer /> */}
             </main>
-            <ReactQueryDevtools initialIsOpen={false} />
+            {/* <ReactQueryDevtools initialIsOpen={false} /> */}
           </ReactQueryProvider>
         </ThemeProvider>
       </body>
