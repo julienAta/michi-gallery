@@ -2,15 +2,14 @@ import { GeistSans } from 'geist/font/sans'
 import ThemeProvider from '@/providers/ThemeProvider'
 import NextTopLoader from 'nextjs-toploader'
 import { Analytics } from '@vercel/analytics/react'
-import './globals.css'
-
-import ReactQueryProvider from '@/providers/ReactQueryProvider'
 import { NextSSRPlugin } from '@uploadthing/react/next-ssr-plugin'
 import { ourFileRouter } from './api/uploadthing/core'
 import { extractRouterConfig } from 'uploadthing/server'
 import Navbar from '@/components/Navbar'
-
 import { Toaster } from '@/components/ui/sonner'
+
+import './globals.css'
+
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : 'http://localhost:3000'
@@ -48,17 +47,12 @@ export default function RootLayout({
           defaultTheme="light"
           disableTransitionOnChange
         >
-          <ReactQueryProvider>
-            <main className="flex min-h-screen flex-col items-center">
-              <Navbar />
-              {children}
-              <Toaster />
-              <Analytics />
-              {/* ^^ remove this if you are not deploying to vercel. See more at https://vercel.com/docs/analytics  */}
-              {/* <Footer /> */}
-            </main>
-            {/* <ReactQueryDevtools initialIsOpen={false} /> */}
-          </ReactQueryProvider>
+          <main className="flex min-h-screen flex-col items-center">
+            <Navbar />
+            {children}
+            <Toaster />
+            <Analytics />
+          </main>
         </ThemeProvider>
       </body>
     </html>
