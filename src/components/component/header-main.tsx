@@ -42,8 +42,11 @@ export function HeaderMain() {
           >
             <Button className="rounded-xl bg-[#764824] ">MICHI MAKER</Button>
           </Link>
+          <Link href="/gallery">
+            <Button className="rounded-xl bg-[#764824] ">GALLERY</Button>
+          </Link>
         </div>
-        <div className=" mr-2 flex items-center justify-center space-x-10 pt-16">
+        <div className="flex items-center justify-center space-x-16 pt-16">
           <Link
             target="_blank"
             rel="noopener noreferrer"
