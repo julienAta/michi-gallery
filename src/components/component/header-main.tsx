@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 export function HeaderMain() {
   return (
-    <div className="my-10 flex h-full w-full items-center justify-center  bg-[#f5e1bc] p-4">
+    <div className="my-10 flex h-full w-full items-center justify-center  bg-[#f5e1bc]  md:p-2 lg:p-4">
       <div className="flex flex-col items-center  space-y-14">
         <h1 className="text-6xl font-bold text-[#764824]">$michi</h1>
         <div className="mt-8">
